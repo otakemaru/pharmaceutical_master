@@ -50,6 +50,6 @@ test:
 production:
   <<: *default
   database: pharmaceutical_master_production
-  host: <%= ENV['FIRST_STORE_DATABASE_HOST'] %>
-  username: <%= ENV['FIRST_STORE_DATABASE_USER'] %>
-  password: <%= ENV['MASTER_DATABASE_PASSWORD'] %>
+  host: <%= ENV['PHARMACEUTICAL_MASTER_DATABASE_HOST'] %>
+  username: <%= ENV['PHARMACEUTICAL_MASTER_DATABASE_USER'] %>
+  password: <%= ENV['PHARMACEUTICAL_MASTER_DATABASE_PASSWORD'] %>
