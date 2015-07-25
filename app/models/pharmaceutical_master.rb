@@ -17,12 +17,12 @@ class PharmaceuticalMaster < ActiveRecord::Base
           d: pharmaceutical_master.i,
           e: pharmaceutical_master.ab,
           f: pharmaceutical_master.ag,
-          g: pharmaceutical_master.ba,
-          h: pharmaceutical_master.bb,
-          i: pharmaceutical_master.price_master.ab,
-          j: regulation_id,
-          aa: RegulationMaster.find(regulation_id).name,
-          ab: pharmaceutical_master.price_master.ag,
+          g: pharmaceutical_master.price_master.ab,
+          h: regulation_id,
+          i: RegulationMaster.find(regulation_id).name,
+          j: pharmaceutical_master.price_master.ag,
+          aa: pharmaceutical_master.ba,
+          ab: pharmaceutical_master.bb,
           ac: efficacy_id,
           ad: EfficacyMaster.find(efficacy_id).name,
           ae: pharmaceutical_master.gs1_master.bj,
@@ -40,7 +40,7 @@ class PharmaceuticalMaster < ActiveRecord::Base
   end
 
   def self.to_csv
-    headers = %w(基準番号（ＨＯＴコード） ＪＡＮコード 薬価基準収載医薬品コード レセプト電算処理システムコード（１） 販売名 包装単位単位 製造会社 販売会社 新又は現金額 麻薬・毒薬・覚せい剤原料・向精神薬 規制分類名 後発品 薬効コード 薬効分類名 調剤包装単位コード 販売包装単位コード 元梱包装単位コード)
+    headers = %w(基準番号（ＨＯＴコード） ＪＡＮコード 薬価基準収載医薬品コード レセプト電算処理システムコード（１） 販売名 包装単位単位 新又は現金額 麻薬・毒薬・覚せい剤原料・向精神薬 規制分類名 後発品 製造会社 販売会社 薬効コード 薬効分類名 調剤包装単位コード 販売包装単位コード 元梱包装単位コード)
     csv_data = CSV.generate(headers: headers, write_headers: true, force_quotes: true) do |csv|
       all.each do |row|
         # csv << row.attributes.values_at(*self.column_names)
