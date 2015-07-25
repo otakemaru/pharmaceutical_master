@@ -1,6 +1,6 @@
 require 'csv'
 class Gs1Master < ActiveRecord::Base
-  #ccが本来の主キーなので、従属を検討する
+  #ccが本来の主キーなので、HOTマスタとの従属を検討する
   self.primary_key = "ce"
   has_one :hot_master
 

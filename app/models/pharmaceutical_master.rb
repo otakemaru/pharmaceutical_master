@@ -5,38 +5,55 @@ class PharmaceuticalMaster < ActiveRecord::Base
     PharmaceuticalMaster.transaction do
       delete_all
       imported_num = 0
-      pharmaceuticals_masters_list = []
-      pharmaceuticals_masters = HotMaster.joins(:price_master, :gs1_master)
+
+      pharmaceuticals_list = []
+      # LEFT OUTER JOINするため、eager_loadを使用
+      pharmaceuticals_masters = HotMaster.eager_load(:price_master, :gs1_master)
+
       pharmaceuticals_masters.each do |pharmaceutical_master|
-        regulation_id = pharmaceutical_master.price_master.ad
-        efficacy_id = pharmaceutical_master.g[0, 3]
-        pharmaceuticals_masters_list << PharmaceuticalMaster.new(
+        pharmaceutical = PharmaceuticalMaster.new
+        pharmaceutical.attributes= {
           a: pharmaceutical_master.a,
           b: pharmaceutical_master.f,
           c: pharmaceutical_master.g,
           d: pharmaceutical_master.i,
           e: pharmaceutical_master.ab,
           f: pharmaceutical_master.ag,
-          g: pharmaceutical_master.price_master.ab,
-          h: regulation_id,
-          i: RegulationMaster.find(regulation_id).name,
-          j: pharmaceutical_master.price_master.ag,
           aa: pharmaceutical_master.ba,
-          ab: pharmaceutical_master.bb,
-          ac: efficacy_id,
-          ad: EfficacyMaster.find(efficacy_id).name,
-          ae: pharmaceutical_master.gs1_master.bj,
-          af: pharmaceutical_master.gs1_master.cc,
-          ag: pharmaceutical_master.gs1_master.cd
-        )
+          ab: pharmaceutical_master.bb
+        }
+
+        if pharmaceutical_master.price_master.present?
+          regulation_id = pharmaceutical_master.price_master.ad
+          efficacy_id = pharmaceutical_master.g[0, 3]
+          pharmaceutical.attributes= {
+            g: pharmaceutical_master.price_master.ab,
+            h: regulation_id,
+            i: RegulationMaster.find(regulation_id).name,
+            j: pharmaceutical_master.price_master.ag,
+            ac: efficacy_id,
+            ad: EfficacyMaster.find(efficacy_id).name
+          }
+        end
+
+        if pharmaceutical_master.gs1_master.present?
+          pharmaceutical.attributes= {
+            ae: pharmaceutical_master.gs1_master.bj,
+            af: pharmaceutical_master.gs1_master.cc,
+            ag: pharmaceutical_master.gs1_master.cd
+          }
+        end
+
+        pharmaceuticals_list << pharmaceutical
         imported_num += 1
       end
+      PharmaceuticalMaster.import pharmaceuticals_list
+
       # 更新件数を返却
-      PharmaceuticalMaster.import pharmaceuticals_masters_list
       imported_num
     end
   rescue => e
-  p  e.message
+    p  e.message
   end
 
   def self.to_csv
@@ -49,5 +66,4 @@ class PharmaceuticalMaster < ActiveRecord::Base
     end
     csv_data.encode(Encoding::UTF_8)
   end
-
 end

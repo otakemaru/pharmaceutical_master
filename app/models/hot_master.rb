@@ -1,6 +1,6 @@
 require 'csv'
 class HotMaster < ActiveRecord::Base
-  self.primary_key = "c"
+  self.primary_key = "a"
   belongs_to :price_master, :foreign_key => "i"
   belongs_to :gs1_master, :foreign_key => "f"
 
