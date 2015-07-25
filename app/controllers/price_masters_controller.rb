@@ -1,11 +1,11 @@
 class PriceMastersController < ApplicationController
   before_action :set_price_master, only: [:show, :edit, :update, :destroy]
 
-  def import
+  def input
     if params[:csv_file].blank?
       redirect_to(price_masters_url, notice: 'インポートするCSVファイルを選択してください')
     elsif params[:csv_file].original_filename.eql?('price_master.csv')
-      num = PriceMaster.import(params[:csv_file])
+      num = PriceMaster.input(params[:csv_file])
       redirect_to(price_masters_url, notice: "#{num.to_s}件の情報を追加 / 更新しました")
     else
       redirect_to(price_masters_url, notice: 'インポートするCSVファイルが異なります')

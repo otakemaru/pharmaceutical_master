@@ -4,11 +4,11 @@ class RegulationMaster < ActiveRecord::Base
   has_one :price_master
 
 # PK:code
-  def self.import(file)
+  def self.input(file)
     RegulationMaster.transaction do
-      destroy_all
+      delete_all
       imported_num = 0
-
+      regulation_master_list = [] #bulk
       # 文字コード変換のためにKernel#openとCSV#newを併用。
       # 参考: http://qiita.com/labocho/items/8559576b71642b79df67
       open(file.path, 'r:cp932:utf-8', undef: :replace) do |f|
@@ -31,11 +31,12 @@ class RegulationMaster < ActiveRecord::Base
               *table.to_hash.except(:code, :name, :created_at, :updated_at).keys)
           # バリデーションOKの場合は保存
           if regulation_master.valid?
-            regulation_master.save!
+            regulation_master_list << regulation_master
             imported_num += 1
           end
         end
       end
+      RegulationMaster.import regulation_master_list
       # 更新件数を返却
       imported_num
     end

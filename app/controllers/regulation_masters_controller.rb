@@ -1,11 +1,11 @@
 class RegulationMastersController < ApplicationController
   before_action :set_regulation_master, only: [:show, :edit, :update, :destroy]
 
-  def import
+  def input
     if params[:csv_file].blank?
       redirect_to(regulation_masters_url, notice: 'インポートするCSVファイルを選択してください')
     elsif params[:csv_file].original_filename.eql?('regulation_master.csv')
-      num = RegulationMaster.import(params[:csv_file])
+      num = RegulationMaster.input(params[:csv_file])
       redirect_to(regulation_masters_url, notice: "#{num.to_s}件の情報を追加 / 更新しました")
     else
       redirect_to(regulation_masters_url, notice: 'インポートするCSVファイルが異なります')

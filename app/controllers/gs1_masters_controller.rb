@@ -1,11 +1,11 @@
 class Gs1MastersController < ApplicationController
   before_action :set_gs1_master, only: [:show, :edit, :update, :destroy]
 
-  def import
+  def input
     if params[:csv_file].blank?
       redirect_to(gs1_masters_url, notice: 'インポートするCSVファイルを選択してください')
     elsif params[:csv_file].original_filename.eql?('gs1_master.csv')
-      num = Gs1Master.import(params[:csv_file])
+      num = Gs1Master.input(params[:csv_file])
       redirect_to(gs1_masters_url, notice: "#{num.to_s}件の情報を追加 / 更新しました")
     else
       redirect_to(gs1_masters_url, notice: 'インポートするCSVファイルが異なります')

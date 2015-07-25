@@ -10,31 +10,31 @@ Rails.application.routes.draw do
   end
   resources :regulation_masters do
     collection do
-      post :import
+      post :input
       delete :delete_all
     end
   end
   resources :efficacy_masters do
     collection do
-      post :import
+      post :input
       delete :delete_all
     end
   end
   resources :gs1_masters do
     collection do
-      post :import
+      post :input
       delete :delete_all
     end
   end
   resources :hot_masters do
     collection do
-      post :import
+      post :input
       delete :delete_all
     end
   end
   resources :price_masters do
     collection do
-      post :import
+      post :input
       delete :delete_all
     end
   end

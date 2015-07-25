@@ -7,7 +7,7 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= form_tag(import_hot_masters_path, :method => :post, multipart: true) do %>
+    <%= form_tag(input_hot_masters_path, :method => :post, multipart: true) do %>
         <div class="form-group">
           <%= file_field_tag :csv_file %>
         </div>
