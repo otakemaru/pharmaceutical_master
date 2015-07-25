@@ -22,8 +22,8 @@ class PharmaceuticalMastersController < ApplicationController
   # GET /pharmaceutical_masters
   # GET /pharmaceutical_masters.json
   def index
-    # @pharmaceutical_masters = PharmaceuticalMaster.page(params[:page])
-    @pharmaceutical_masters = PharmaceuticalMaster.all
+    @pharmaceutical_masters = PharmaceuticalMaster.page(params[:page])
+    # @pharmaceutical_masters = PharmaceuticalMaster.all
   end
 
   # GET /pharmaceutical_masters/1

@@ -6,6 +6,9 @@
 <p><%= link_to 'CSV出力', export_csv_pharmaceutical_masters_path %></p>
 <p><%= link_to '全削除', delete_all_pharmaceutical_masters_path, :method => :delete %></p>
 
+<p><%= page_entries_info @pharmaceutical_masters %></p>
+<p><%= paginate @pharmaceutical_masters %></p>
+
 <table>
   <thead>
     <tr>
@@ -59,5 +62,7 @@
 </table>
 
 <br>
+
+<%= paginate @pharmaceutical_masters %>
 
 <%= link_to 'New Pharmaceutical master', new_pharmaceutical_master_path %>
