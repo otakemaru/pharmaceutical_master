@@ -1,0 +1,25 @@
+<%= form_for(@regulation_master) do |f| %>
+  <% if @regulation_master.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@regulation_master.errors.count, "error") %> prohibited this regulation_master from being saved:</h2>
+
+      <ul>
+      <% @regulation_master.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

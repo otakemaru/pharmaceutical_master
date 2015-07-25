@@ -1,0 +1,133 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Gs1 Masters</h1>
+
+<p><%= link_to "GS1マスタ：医薬品情報製品コード", "http://medgs1.medd.jp/view_download" %></p>
+<p>A_YYYYMMDD_2.csv -> gs1_master.csv</p>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_tag(import_gs1_masters_path, :method => :post, multipart: true) do %>
+        <div class="form-group">
+          <%= file_field_tag :csv_file %>
+        </div>
+        <%= submit_tag "CSVインポート", :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<p><%= link_to '全削除', delete_all_gs1_masters_path, :method => :delete %></p>
+<p><%= link_to '新規登録', new_gs1_master_path %></p>
+
+<p><%= page_entries_info @gs1_masters %></p>
+<p><%= paginate @gs1_masters %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>更新区分</th>
+      <th>更新年月日</th>
+      <th>データ登録企業名</th>
+      <th>販売名</th>
+      <th>販売名５０音：１</th>
+      <th>販売名５０音：２</th>
+      <th>販売名５０音：３</th>
+      <th>告示分類</th>
+      <th>薬価コード</th>
+      <th>告示名称</th>
+      <th>告示日</th>
+      <th>経過措置日</th>
+      <th>規格・製造承認時規格</th>
+      <th>予備１</th>
+      <th>予備２</th>
+      <th>区分名</th>
+      <th>剤形</th>
+      <th>溶解液種類（成分）</th>
+      <th>溶解液容量</th>
+      <th>溶解液容量単位 </th>
+      <th>生物由来製品区分</th>
+      <th>麻薬・皮内反応薬区分</th>
+      <th>包装形態</th>
+      <th>包装単位数</th>
+      <th>包装単位数単位</th>
+      <th>総数量数</th>
+      <th>総数量数単位</th>
+      <th>１連の包装数</th>
+      <th>予備３</th>
+      <th>調剤包装単位コード</th>
+      <th>調剤包装単位名称</th>
+      <th>調剤包装単位細区分</th>
+      <th>販売包装単位コード</th>
+      <th>元梱包装単位コード</th>
+      <th>物流用ＪＡＮコード</th>
+      <th>予備４</th>
+      <th>予備５</th>
+      <th>予備６</th>
+      <th>予備７</th>
+      <th>予備８</th>
+      <th>対照液の包装情報フラグ</th>
+      <th>対照液の情報</th>
+      <th>販売中止年月日</th>
+      <th>最終ロット使用期限</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @gs1_masters.each do |gs1_master| %>
+      <tr>
+        <td><%= gs1_master.a %></td>
+        <td><%= gs1_master.b %></td>
+        <td><%= gs1_master.c %></td>
+        <td><%= gs1_master.d %></td>
+        <td><%= gs1_master.e %></td>
+        <td><%= gs1_master.f %></td>
+        <td><%= gs1_master.g %></td>
+        <td><%= gs1_master.h %></td>
+        <td><%= gs1_master.i %></td>
+        <td><%= gs1_master.j %></td>
+        <td><%= gs1_master.aa %></td>
+        <td><%= gs1_master.ab %></td>
+        <td><%= gs1_master.ac %></td>
+        <td><%= gs1_master.ad %></td>
+        <td><%= gs1_master.ae %></td>
+        <td><%= gs1_master.af %></td>
+        <td><%= gs1_master.ag %></td>
+        <td><%= gs1_master.ah %></td>
+        <td><%= gs1_master.ai %></td>
+        <td><%= gs1_master.aj %></td>
+        <td><%= gs1_master.ba %></td>
+        <td><%= gs1_master.bb %></td>
+        <td><%= gs1_master.bc %></td>
+        <td><%= gs1_master.bd %></td>
+        <td><%= gs1_master.be %></td>
+        <td><%= gs1_master.bf %></td>
+        <td><%= gs1_master.bg %></td>
+        <td><%= gs1_master.bh %></td>
+        <td><%= gs1_master.bi %></td>
+        <td><%= gs1_master.bj %></td>
+        <td><%= gs1_master.ca %></td>
+        <td><%= gs1_master.cb %></td>
+        <td><%= gs1_master.cc %></td>
+        <td><%= gs1_master.cd %></td>
+        <td><%= gs1_master.ce %></td>
+        <td><%= gs1_master.cf %></td>
+        <td><%= gs1_master.cg %></td>
+        <td><%= gs1_master.ch %></td>
+        <td><%= gs1_master.ci %></td>
+        <td><%= gs1_master.cj %></td>
+        <td><%= gs1_master.da %></td>
+        <td><%= gs1_master.db %></td>
+        <td><%= gs1_master.dc %></td>
+        <td><%= gs1_master.dd %></td>
+        <td><%= link_to 'Show', gs1_master %></td>
+        <td><%= link_to 'Edit', edit_gs1_master_path(gs1_master) %></td>
+        <td><%= link_to 'Destroy', gs1_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= paginate @gs1_masters %>

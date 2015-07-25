@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Regulation Masters</h1>
+
+<p><%= link_to "(4) 医薬品マスター > 14", "http://www.iryohoken.go.jp/shinryohoshu/file/spec/22rec.pdf" %></p>
+<p>regulation_master.csv</p>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_tag(import_regulation_masters_path, :method => :post, multipart: true) do %>
+        <div class="form-group">
+          <%= file_field_tag :csv_file %>
+        </div>
+        <%= submit_tag "CSVインポート", :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<p><%= link_to '全削除', delete_all_regulation_masters_path, :method => :delete %></p>
+<p><%= link_to '新規登録', new_regulation_master_path %></p>
+
+<p><%= page_entries_info @regulation_masters %></p>
+<p><%= paginate @regulation_masters %></p>
+
+<table>
+  <thead>
+  <tr>
+    <th>規制分類コード</th>
+    <th>規制分類名</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @regulation_masters.each do |regulation_master| %>
+      <tr>
+        <td><%= regulation_master.code %></td>
+        <td><%= regulation_master.name %></td>
+        <td><%= link_to 'Show', regulation_master %></td>
+        <td><%= link_to 'Edit', edit_regulation_master_path(regulation_master) %></td>
+        <td><%= link_to 'Destroy', regulation_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<p><%= paginate @regulation_masters %></p>

@@ -1,0 +1,113 @@
+<%= form_for(@hot_master) do |f| %>
+  <% if @hot_master.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@hot_master.errors.count, "error") %> prohibited this hot_master from being saved:</h2>
+
+      <ul>
+      <% @hot_master.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :a %><br>
+    <%= f.text_field :a %>
+  </div>
+  <div class="field">
+    <%= f.label :b %><br>
+    <%= f.text_field :b %>
+  </div>
+  <div class="field">
+    <%= f.label :c %><br>
+    <%= f.text_field :c %>
+  </div>
+  <div class="field">
+    <%= f.label :d %><br>
+    <%= f.text_field :d %>
+  </div>
+  <div class="field">
+    <%= f.label :e %><br>
+    <%= f.text_field :e %>
+  </div>
+  <div class="field">
+    <%= f.label :f %><br>
+    <%= f.text_field :f %>
+  </div>
+  <div class="field">
+    <%= f.label :g %><br>
+    <%= f.text_field :g %>
+  </div>
+  <div class="field">
+    <%= f.label :h %><br>
+    <%= f.text_field :h %>
+  </div>
+  <div class="field">
+    <%= f.label :i %><br>
+    <%= f.text_field :i %>
+  </div>
+  <div class="field">
+    <%= f.label :j %><br>
+    <%= f.text_field :j %>
+  </div>
+  <div class="field">
+    <%= f.label :aa %><br>
+    <%= f.text_field :aa %>
+  </div>
+  <div class="field">
+    <%= f.label :ab %><br>
+    <%= f.text_field :ab %>
+  </div>
+  <div class="field">
+    <%= f.label :ac %><br>
+    <%= f.text_field :ac %>
+  </div>
+  <div class="field">
+    <%= f.label :ad %><br>
+    <%= f.text_field :ad %>
+  </div>
+  <div class="field">
+    <%= f.label :ae %><br>
+    <%= f.text_field :ae %>
+  </div>
+  <div class="field">
+    <%= f.label :af %><br>
+    <%= f.text_field :af %>
+  </div>
+  <div class="field">
+    <%= f.label :ag %><br>
+    <%= f.text_field :ag %>
+  </div>
+  <div class="field">
+    <%= f.label :ah %><br>
+    <%= f.text_field :ah %>
+  </div>
+  <div class="field">
+    <%= f.label :ai %><br>
+    <%= f.text_field :ai %>
+  </div>
+  <div class="field">
+    <%= f.label :aj %><br>
+    <%= f.text_field :aj %>
+  </div>
+  <div class="field">
+    <%= f.label :ba %><br>
+    <%= f.text_field :ba %>
+  </div>
+  <div class="field">
+    <%= f.label :bb %><br>
+    <%= f.text_field :bb %>
+  </div>
+  <div class="field">
+    <%= f.label :bc %><br>
+    <%= f.text_field :bc %>
+  </div>
+  <div class="field">
+    <%= f.label :bd %><br>
+    <%= f.text_field :bd %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

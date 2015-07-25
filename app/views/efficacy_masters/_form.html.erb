@@ -1,0 +1,25 @@
+<%= form_for(@efficacy_master) do |f| %>
+  <% if @efficacy_master.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@efficacy_master.errors.count, "error") %> prohibited this efficacy_master from being saved:</h2>
+
+      <ul>
+      <% @efficacy_master.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

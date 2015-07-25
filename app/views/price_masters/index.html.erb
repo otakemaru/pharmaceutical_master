@@ -1,0 +1,115 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Price Masters</h1>
+
+<p><%= link_to "厚労省マスタ：診療報酬情報提供サービス＞医薬品マスター", "http://www.iryohoken.go.jp/shinryohoshu/downloadMenu/" %></p>
+<p>y.csv -> price_master.csv</p>
+
+<div class="panel panel-default">
+  <div class="panel-body">
+    <%= form_tag(import_price_masters_path, :method => :post, multipart: true) do %>
+        <div class="form-group">
+          <%= file_field_tag :csv_file %>
+        </div>
+        <%= submit_tag "CSVインポート", :class => "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<p><%= link_to '全削除', delete_all_price_masters_path, :method => :delete %></p>
+<p><%= link_to '新規登録', new_price_master_path %></p>
+
+<p><%= page_entries_info @price_masters %></p>
+<p><%= paginate @price_masters %></p>
+
+<table>
+  <thead>
+  <tr>
+    <th>変更区分</th>
+    <th>マスター種別</th>
+    <th>医薬品コード 医薬品名・規格名品コード</th>
+    <th>医薬品コード 漢字有効桁数</th>
+    <th>医薬品コード 漢字名称</th>
+    <th>医薬品コード カナ有効桁数</th>
+    <th>医薬品コード カナ名称</th>
+    <th>単位 コード</th>
+    <th>単位 漢字有効桁数</th>
+    <th>単位 漢字名称</th>
+    <th>新又は現金額 金額種別</th>
+    <th>新又は現金額 新又は現金額</th>
+    <th>予備</th>
+    <th>1麻薬,2毒薬,3覚せい剤原料,5向精神薬</th>
+    <th>神経破壊剤</th>
+    <th>生物学的製剤</th>
+    <th>0先発品,1後発品</th>
+    <th>予備</th>
+    <th>歯科特定薬剤</th>
+    <th>造影(補助)剤</th>
+    <th>注射容量</th>
+    <th>収載方式等識別</th>
+    <th>商品名等関連 旧額</th>
+    <th>商品名等関連 旧金額種別</th>
+    <th>商品名等関連 旧金額</th>
+    <th>漢字名称変更区分</th>
+    <th>カナ名称変更区分</th>
+    <th>剤形</th>
+    <th>予備</th>
+    <th>変更年月日</th>
+    <th>廃止年月日</th>
+    <th>薬価基準コード</th>
+    <th>公表順序番号</th>
+    <th>経過措置年月日又は商品名医薬品コード使用期限</th>
+    <th>基本漢字名称</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @price_masters.each do |price_master| %>
+      <tr>
+        <td><%= price_master.a %></td>
+        <td><%= price_master.b %></td>
+        <td><%= price_master.c %></td>
+        <td><%= price_master.d %></td>
+        <td><%= price_master.e %></td>
+        <td><%= price_master.f %></td>
+        <td><%= price_master.g %></td>
+        <td><%= price_master.h %></td>
+        <td><%= price_master.i %></td>
+        <td><%= price_master.j %></td>
+        <td><%= price_master.aa %></td>
+        <td><%= price_master.ab %></td>
+        <td><%= price_master.ac %></td>
+        <td><%= price_master.ad %></td>
+        <td><%= price_master.ae %></td>
+        <td><%= price_master.af %></td>
+        <td><%= price_master.ag %></td>
+        <td><%= price_master.ah %></td>
+        <td><%= price_master.ai %></td>
+        <td><%= price_master.aj %></td>
+        <td><%= price_master.ba %></td>
+        <td><%= price_master.bb %></td>
+        <td><%= price_master.bc %></td>
+        <td><%= price_master.bd %></td>
+        <td><%= price_master.be %></td>
+        <td><%= price_master.bf %></td>
+        <td><%= price_master.bg %></td>
+        <td><%= price_master.bh %></td>
+        <td><%= price_master.bi %></td>
+        <td><%= price_master.bj %></td>
+        <td><%= price_master.ca %></td>
+        <td><%= price_master.cb %></td>
+        <td><%= price_master.cc %></td>
+        <td><%= price_master.cd %></td>
+        <td><%= price_master.ce %></td>
+        <td><%= link_to 'Show', price_master %></td>
+        <td><%= link_to 'Edit', edit_price_master_path(price_master) %></td>
+        <td><%= link_to 'Destroy', price_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= paginate @price_masters %>

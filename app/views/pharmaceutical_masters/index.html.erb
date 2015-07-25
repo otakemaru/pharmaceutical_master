@@ -1,0 +1,63 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pharmaceutical Masters</h1>
+
+<p><%= link_to 'データ統合', integrate_pharmaceutical_masters_path, :method => :post %></p>
+<p><%= link_to 'CSV出力', export_csv_pharmaceutical_masters_path %></p>
+<p><%= link_to '全削除', delete_all_pharmaceutical_masters_path, :method => :delete %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>基準番号（ＨＯＴコード）</th>
+      <th>ＪＡＮコード</th>
+      <th>薬価基準収載医薬品コード</th>
+      <th>レセプト電算処理システムコード（１）</th>
+      <th>販売名</th>
+      <th>包装単位単位</th>
+      <th>製造会社</th>
+      <th>販売会社</th>
+      <th>新又は現金額</th>
+      <th>1麻薬,2毒薬,3覚せい剤原料,5向精神薬</th>
+      <th>規制分類名</th>
+      <th>0先発品,1後発品</th>
+      <th>薬効分類コード</th>
+      <th>薬効分類名</th>
+      <th>調剤包装単位コード</th>
+      <th>販売包装単位コード</th>
+      <th>元梱包装単位コード</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pharmaceutical_masters.each do |pharmaceutical_master| %>
+      <tr>
+        <td><%= pharmaceutical_master.a %></td>
+        <td><%= pharmaceutical_master.b %></td>
+        <td><%= pharmaceutical_master.c %></td>
+        <td><%= pharmaceutical_master.d %></td>
+        <td><%= pharmaceutical_master.e %></td>
+        <td><%= pharmaceutical_master.f %></td>
+        <td><%= pharmaceutical_master.g %></td>
+        <td><%= pharmaceutical_master.h %></td>
+        <td><%= pharmaceutical_master.i %></td>
+        <td><%= pharmaceutical_master.j %></td>
+        <td><%= pharmaceutical_master.aa %></td>
+        <td><%= pharmaceutical_master.ab %></td>
+        <td><%= pharmaceutical_master.ac %></td>
+        <td><%= pharmaceutical_master.ad %></td>
+        <td><%= pharmaceutical_master.ae %></td>
+        <td><%= pharmaceutical_master.af %></td>
+        <td><%= pharmaceutical_master.ag %></td>
+        <td><%= link_to 'Show', pharmaceutical_master %></td>
+        <td><%= link_to 'Edit', edit_pharmaceutical_master_path(pharmaceutical_master) %></td>
+        <td><%= link_to 'Destroy', pharmaceutical_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pharmaceutical master', new_pharmaceutical_master_path %>

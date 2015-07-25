@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Master</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="header">
+  <ul>
+    <li><%= link_to 'pharmaceutical', pharmaceutical_masters_path %></li>
+    <li><%= link_to 'price', price_masters_path %></li>
+    <li><%= link_to 'hot', hot_masters_path %></li>
+    <li><%= link_to 'gs1', gs1_masters_path %></li>
+    <li><%= link_to 'efficacy', efficacy_masters_path %></li>
+    <li><%= link_to 'regulation', regulation_masters_path %></li>
+  </ul>
+</div>
+
+<%= yield %>
+
+</body>
+</html>

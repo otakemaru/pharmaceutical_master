@@ -1,0 +1,1 @@
+json.extract! @gs1_master, :id, :a, :b, :c, :d, :e, :f, :g, :h, :i, :j, :aa, :ab, :ac, :ad, :ae, :af, :ag, :ah, :ai, :aj, :ba, :bb, :bc, :bd, :be, :bf, :bg, :bh, :bi, :bj, :ca, :cb, :cc, :cd, :ce, :cf, :cg, :ch, :ci, :cj, :da, :db, :dc, :dd, :created_at, :updated_at

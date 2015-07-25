@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @regulation_master.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @regulation_master.name %>
+</p>
+
+<%= link_to 'Edit', edit_regulation_master_path(@regulation_master) %> |
+<%= link_to 'Back', regulation_masters_path %>

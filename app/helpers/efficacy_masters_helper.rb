@@ -1,0 +1,2 @@
+module EfficacyMastersHelper
+end
