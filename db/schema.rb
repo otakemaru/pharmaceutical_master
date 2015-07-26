@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20150722190022) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "efficacy_masters", ["code"], name: "index_efficacy_masters_on_code", using: :btree
+
   create_table "gs1_masters", force: :cascade do |t|
     t.string   "a",          limit: 255
     t.string   "b",          limit: 255
@@ -69,6 +71,8 @@ ActiveRecord::Schema.define(version: 20150722190022) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "gs1_masters", ["ce"], name: "index_gs1_masters_on_ce", using: :btree
+
   create_table "hot_masters", force: :cascade do |t|
     t.string   "a",          limit: 255
     t.string   "b",          limit: 255
@@ -98,6 +102,8 @@ ActiveRecord::Schema.define(version: 20150722190022) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "hot_masters", ["a", "f", "i"], name: "index_hot_masters_on_a_and_f_and_i", using: :btree
+
   create_table "pharmaceutical_masters", force: :cascade do |t|
     t.string   "a",          limit: 255
     t.string   "b",          limit: 255
@@ -119,6 +125,8 @@ ActiveRecord::Schema.define(version: 20150722190022) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "pharmaceutical_masters", ["a"], name: "index_pharmaceutical_masters_on_a", using: :btree
 
   create_table "price_masters", force: :cascade do |t|
     t.string   "a",          limit: 255
@@ -160,11 +168,15 @@ ActiveRecord::Schema.define(version: 20150722190022) do
     t.datetime "updated_at",             null: false
   end
 
+  add_index "price_masters", ["c", "ad"], name: "index_price_masters_on_c_and_ad", using: :btree
+
   create_table "regulation_masters", force: :cascade do |t|
     t.string   "code",       limit: 255
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  add_index "regulation_masters", ["code"], name: "index_regulation_masters_on_code", using: :btree
 
 end

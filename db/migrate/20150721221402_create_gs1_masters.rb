@@ -48,5 +48,7 @@ class CreateGs1Masters < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :gs1_masters, [:ce]
   end
 end

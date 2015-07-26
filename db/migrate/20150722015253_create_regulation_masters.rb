@@ -6,5 +6,7 @@ class CreateRegulationMasters < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :regulation_masters, [:code]
   end
 end

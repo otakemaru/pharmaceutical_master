@@ -39,5 +39,7 @@ class CreatePriceMasters < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :price_masters, [:c, :ad]
   end
 end

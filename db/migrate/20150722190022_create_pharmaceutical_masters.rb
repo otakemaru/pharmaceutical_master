@@ -21,5 +21,7 @@ class CreatePharmaceuticalMasters < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_index :pharmaceutical_masters, [:a]
   end
 end

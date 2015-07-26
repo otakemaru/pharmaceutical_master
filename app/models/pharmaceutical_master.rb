@@ -5,13 +5,12 @@ class PharmaceuticalMaster < ActiveRecord::Base
     PharmaceuticalMaster.transaction do
       delete_all
       imported_num = 0
-
       pharmaceuticals_list = []
-      # LEFT OUTER JOINするため、eager_loadを使用
-      pharmaceuticals_masters = HotMaster.eager_load(:price_master, :gs1_master)
 
+      # LEFT OUTER JOINするため、Hotを軸にeager_loadを使用(本来、priceの右外部か完全結合したい)
+      pharmaceuticals_masters = HotMaster.eager_load(:price_master, :gs1_master)
       pharmaceuticals_masters.each do |pharmaceutical_master|
-        pharmaceutical = PharmaceuticalMaster.new
+        pharmaceutical = new
         pharmaceutical.attributes= {
           a: pharmaceutical_master.a,
           b: pharmaceutical_master.f,
@@ -48,8 +47,6 @@ class PharmaceuticalMaster < ActiveRecord::Base
         imported_num += 1
       end
       PharmaceuticalMaster.import pharmaceuticals_list
-
-      # 更新件数を返却
       imported_num
     end
   rescue => e
