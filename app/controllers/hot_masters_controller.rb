@@ -3,19 +3,19 @@ class HotMastersController < ApplicationController
 
   def input
     if params[:csv_file].blank?
-      redirect_to(hot_masters_url, notice: 'インポートするCSVファイルを選択してください')
+      redirect_to(hot_masters_url, alert: INPUT_BLANK_ALERT)
     elsif params[:csv_file].original_filename.eql?('hot_master.csv')
       num = HotMaster.input(params[:csv_file])
-      redirect_to(hot_masters_url, notice: "#{num.to_s}件の情報を追加 / 更新しました")
+      redirect_to(hot_masters_url, notice: "#{num.to_s}" + INPUT_NOTICE)
     else
-      redirect_to(hot_masters_url, notice: 'インポートするCSVファイルが異なります')
+      redirect_to(hot_masters_url, alert: INPUT_DIFFERENT_ALERT)
     end
   end
 
   def delete_all
     HotMaster.delete_all
     respond_to do |format|
-      format.html { redirect_to hot_masters_url, notice: 'Hot master was successfully destroyed.' }
+      format.html { redirect_to hot_masters_url, notice: DELETE_ALL_NOTICE }
       format.json { head :no_content }
     end
   end
@@ -49,7 +49,7 @@ class HotMastersController < ApplicationController
 
     respond_to do |format|
       if @hot_master.save
-        format.html { redirect_to @hot_master, notice: 'Hot master was successfully created.' }
+        format.html { redirect_to @hot_master, notice: CREATE_NOTICE }
         format.json { render :show, status: :created, location: @hot_master }
       else
         format.html { render :new }
@@ -63,7 +63,7 @@ class HotMastersController < ApplicationController
   def update
     respond_to do |format|
       if @hot_master.update(hot_master_params)
-        format.html { redirect_to @hot_master, notice: 'Hot master was successfully updated.' }
+        format.html { redirect_to @hot_master, notice: UPDATE_NOTICE }
         format.json { render :show, status: :ok, location: @hot_master }
       else
         format.html { render :edit }
@@ -77,7 +77,7 @@ class HotMastersController < ApplicationController
   def destroy
     @hot_master.destroy
     respond_to do |format|
-      format.html { redirect_to hot_masters_url, notice: 'Hot master was successfully destroyed.' }
+      format.html { redirect_to hot_masters_url, notice: DELETE_NOTICE }
       format.json { head :no_content }
     end
   end

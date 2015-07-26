@@ -3,19 +3,19 @@ class Gs1MastersController < ApplicationController
 
   def input
     if params[:csv_file].blank?
-      redirect_to(gs1_masters_url, notice: 'インポートするCSVファイルを選択してください')
+      redirect_to(gs1_masters_url, alert: INPUT_BLANK_ALERT)
     elsif params[:csv_file].original_filename.eql?('gs1_master.csv')
       num = Gs1Master.input(params[:csv_file])
-      redirect_to(gs1_masters_url, notice: "#{num.to_s}件の情報を追加 / 更新しました")
+      redirect_to(gs1_masters_url, notice: "#{num.to_s}" + INPUT_NOTICE)
     else
-      redirect_to(gs1_masters_url, notice: 'インポートするCSVファイルが異なります')
+      redirect_to(gs1_masters_url, alert: INPUT_DIFFERENT_ALERT)
     end
   end
 
   def delete_all
     Gs1Master.delete_all
     respond_to do |format|
-      format.html { redirect_to gs1_masters_url, notice: 'Gs1 master was successfully destroyed.' }
+      format.html { redirect_to gs1_masters_url, notice: DELETE_ALL_NOTICE }
       format.json { head :no_content }
     end
   end
@@ -48,7 +48,7 @@ class Gs1MastersController < ApplicationController
 
     respond_to do |format|
       if @gs1_master.save
-        format.html { redirect_to @gs1_master, notice: 'Gs1 master was successfully created.' }
+        format.html { redirect_to @gs1_master, notice: CREATE_NOTICE }
         format.json { render :show, status: :created, location: @gs1_master }
       else
         format.html { render :new }
@@ -62,7 +62,7 @@ class Gs1MastersController < ApplicationController
   def update
     respond_to do |format|
       if @gs1_master.update(gs1_master_params)
-        format.html { redirect_to @gs1_master, notice: 'Gs1 master was successfully updated.' }
+        format.html { redirect_to @gs1_master, notice: UPDATE_NOTICE }
         format.json { render :show, status: :ok, location: @gs1_master }
       else
         format.html { render :edit }
@@ -76,7 +76,7 @@ class Gs1MastersController < ApplicationController
   def destroy
     @gs1_master.destroy
     respond_to do |format|
-      format.html { redirect_to gs1_masters_url, notice: 'Gs1 master was successfully destroyed.' }
+      format.html { redirect_to gs1_masters_url, notice: DELETE_NOTICE }
       format.json { head :no_content }
     end
   end

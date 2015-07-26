@@ -3,19 +3,19 @@ class EfficacyMastersController < ApplicationController
 
   def input
     if params[:csv_file].blank?
-      redirect_to(efficacy_masters_url, notice: 'インポートするCSVファイルを選択してください')
+      redirect_to(efficacy_masters_url, alert: INPUT_BLANK_ALERT)
     elsif params[:csv_file].original_filename.eql?('efficacy_master.csv')
       num = EfficacyMaster.input(params[:csv_file])
-      redirect_to(efficacy_masters_url, notice: "#{num.to_s}件の情報を追加 / 更新しました")
+      redirect_to(efficacy_masters_url, notice: "#{num.to_s}" + INPUT_NOTICE)
     else
-      redirect_to(efficacy_masters_url, notice: 'インポートするCSVファイルが異なります')
+      redirect_to(efficacy_masters_url, alert: INPUT_DIFFERENT_ALERT)
     end
   end
 
   def delete_all
     EfficacyMaster.delete_all
     respond_to do |format|
-      format.html { redirect_to efficacy_masters_url, notice: 'Efficacy master was successfully destroyed.' }
+      format.html { redirect_to efficacy_masters_url, notice: DELETE_ALL_NOTICE }
       format.json { head :no_content }
     end
   end
@@ -48,7 +48,7 @@ class EfficacyMastersController < ApplicationController
 
     respond_to do |format|
       if @efficacy_master.save
-        format.html { redirect_to @efficacy_master, notice: 'Efficacy master was successfully created.' }
+        format.html { redirect_to @efficacy_master, notice: CREATE_NOTICE }
         format.json { render :show, status: :created, location: @efficacy_master }
       else
         format.html { render :new }
@@ -62,7 +62,7 @@ class EfficacyMastersController < ApplicationController
   def update
     respond_to do |format|
       if @efficacy_master.update(efficacy_master_params)
-        format.html { redirect_to @efficacy_master, notice: 'Efficacy master was successfully updated.' }
+        format.html { redirect_to @efficacy_master, notice: UPDATE_NOTICE }
         format.json { render :show, status: :ok, location: @efficacy_master }
       else
         format.html { render :edit }
@@ -76,7 +76,7 @@ class EfficacyMastersController < ApplicationController
   def destroy
     @efficacy_master.destroy
     respond_to do |format|
-      format.html { redirect_to efficacy_masters_url, notice: 'Efficacy master was successfully destroyed.' }
+      format.html { redirect_to efficacy_masters_url, notice: DELETE_NOTICE }
       format.json { head :no_content }
     end
   end
