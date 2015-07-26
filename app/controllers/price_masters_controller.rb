@@ -3,19 +3,19 @@ class PriceMastersController < ApplicationController
 
   def input
     if params[:csv_file].blank?
-      redirect_to(price_masters_url, notice: 'インポートするCSVファイルを選択してください')
+      redirect_to(price_masters_url, alert: INPUT_BLANK_ALERT)
     elsif params[:csv_file].original_filename.eql?('price_master.csv')
       num = PriceMaster.input(params[:csv_file])
-      redirect_to(price_masters_url, notice: "#{num.to_s}件の情報を追加 / 更新しました")
+      redirect_to(price_masters_url, notice: "#{num.to_s}" + INPUT_NOTICE)
     else
-      redirect_to(price_masters_url, notice: 'インポートするCSVファイルが異なります')
+      redirect_to(price_masters_url, alert: INPUT_DIFFERENT_ALERT)
     end
   end
 
   def delete_all
     PriceMaster.delete_all
     respond_to do |format|
-      format.html { redirect_to price_masters_url, notice: 'Price master was successfully destroyed.' }
+      format.html { redirect_to price_masters_url, notice: DELETE_ALL_NOTICE }
       format.json { head :no_content }
     end
   end
@@ -49,7 +49,7 @@ class PriceMastersController < ApplicationController
 
     respond_to do |format|
       if @price_master.save
-        format.html { redirect_to @price_master, notice: 'Price master was successfully created.' }
+        format.html { redirect_to @price_master, notice: CREATE_NOTICE }
         format.json { render :show, status: :created, location: @price_master }
       else
         format.html { render :new }
@@ -63,7 +63,7 @@ class PriceMastersController < ApplicationController
   def update
     respond_to do |format|
       if @price_master.update(price_master_params)
-        format.html { redirect_to @price_master, notice: 'Price master was successfully updated.' }
+        format.html { redirect_to @price_master, notice: UPDATE_NOTICE }
         format.json { render :show, status: :ok, location: @price_master }
       else
         format.html { render :edit }
@@ -77,7 +77,7 @@ class PriceMastersController < ApplicationController
   def destroy
     @price_master.destroy
     respond_to do |format|
-      format.html { redirect_to price_masters_url, notice: 'Price master was successfully destroyed.' }
+      format.html { redirect_to price_masters_url, notice: DELETE_NOTICE }
       format.json { head :no_content }
     end
   end

@@ -1,15 +1,30 @@
-<p id="notice"><%= notice %></p>
+<div class="jumbotron">
+  <div class="container">
+    <h1>Pharmaceutical Masters</h1>
+    <p>This is 医薬品マスタ</p>
+    <p>いくつかのマスタを統合して医薬品マスタを作成＆出力</p>
+    <p class="text-danger"><strong><%= flash[:alert] %></strong></p>
+    <p class="text-success"><strong><%= flash[:notice] %></strong></p>
 
-<h1>Pharmaceutical Masters</h1>
-
-<p><%= link_to 'データ統合', integrate_pharmaceutical_masters_path, :method => :post %></p>
-<p><%= link_to 'CSV出力', export_csv_pharmaceutical_masters_path %></p>
-<p><%= link_to '全削除', delete_all_pharmaceutical_masters_path, :method => :delete %></p>
+    <div class="container">
+      <p>
+        <%= link_to 'データ統合', integrate_pharmaceutical_masters_path, :method => :post,
+                    class: "btn btn-primary btn-raised" %>
+        <%= link_to 'CSV出力', export_csv_pharmaceutical_masters_path,
+                    class: "btn btn-primary btn-raised"  %>
+        <%= link_to '新規登録', new_pharmaceutical_master_path,
+                    class: "btn btn-primary btn-raised"  %>
+        <%= link_to '全削除', delete_all_pharmaceutical_masters_path, :method => :delete,
+                    data: { confirm: '本当に消しますか？' }, class: "btn btn-danger btn-raised"  %>
+      </p>
+    </div>
+  </div>
+</div>
 
 <p><%= page_entries_info @pharmaceutical_masters %></p>
 <p><%= paginate @pharmaceutical_masters %></p>
 
-<table>
+<table class="table table-striped table-bordered">
   <thead>
     <tr>
       <th>基準番号（ＨＯＴコード）</th>
@@ -29,6 +44,7 @@
       <th>調剤包装単位コード</th>
       <th>販売包装単位コード</th>
       <th>元梱包装単位コード</th>
+      <th>操作</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -53,9 +69,11 @@
         <td><%= pharmaceutical_master.ae %></td>
         <td><%= pharmaceutical_master.af %></td>
         <td><%= pharmaceutical_master.ag %></td>
-        <td><%= link_to 'Show', pharmaceutical_master %></td>
-        <td><%= link_to 'Edit', edit_pharmaceutical_master_path(pharmaceutical_master) %></td>
-        <td><%= link_to 'Destroy', pharmaceutical_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <%= link_to '', pharmaceutical_master, class: "mdi-action-info-outline" %>
+          <%= link_to '', edit_pharmaceutical_master_path(pharmaceutical_master), class: "mdi-editor-mode-edit" %>
+          <%= link_to '', pharmaceutical_master, method: :delete, data: { confirm: '本当に消しますか？' }, class: "mdi-action-delete" %>
+        </td>
       </tr>
     <% end %>
   </tbody>
@@ -65,4 +83,3 @@
 
 <%= paginate @pharmaceutical_masters %>
 
-<%= link_to 'New Pharmaceutical master', new_pharmaceutical_master_path %>

@@ -3,7 +3,7 @@ class PharmaceuticalMastersController < ApplicationController
 
   def integrate
     num = PharmaceuticalMaster.integrate
-    redirect_to(pharmaceutical_masters_url, notice: "#{num.to_s}件の情報を追加 / 更新しました")
+    redirect_to(pharmaceutical_masters_url, notice: "#{num.to_s}" + INPUT_NOTICE)
   end
 
   def export_csv
@@ -14,7 +14,7 @@ class PharmaceuticalMastersController < ApplicationController
   def delete_all
     PharmaceuticalMaster.delete_all
     respond_to do |format|
-      format.html { redirect_to pharmaceutical_masters_url, notice: 'Pharmaceutical master was successfully destroyed.' }
+      format.html { redirect_to pharmaceutical_masters_url, notice: DELETE_ALL_NOTICE }
       format.json { head :no_content }
     end
   end
@@ -47,7 +47,7 @@ class PharmaceuticalMastersController < ApplicationController
 
     respond_to do |format|
       if @pharmaceutical_master.save
-        format.html { redirect_to @pharmaceutical_master, notice: 'Pharmaceutical master was successfully created.' }
+        format.html { redirect_to @pharmaceutical_master, notice: CREATE_NOTICE }
         format.json { render :show, status: :created, location: @pharmaceutical_master }
       else
         format.html { render :new }
@@ -61,7 +61,7 @@ class PharmaceuticalMastersController < ApplicationController
   def update
     respond_to do |format|
       if @pharmaceutical_master.update(pharmaceutical_master_params)
-        format.html { redirect_to @pharmaceutical_master, notice: 'Pharmaceutical master was successfully updated.' }
+        format.html { redirect_to @pharmaceutical_master, notice: UPDATE_NOTICE }
         format.json { render :show, status: :ok, location: @pharmaceutical_master }
       else
         format.html { render :edit }
@@ -75,7 +75,7 @@ class PharmaceuticalMastersController < ApplicationController
   def destroy
     @pharmaceutical_master.destroy
     respond_to do |format|
-      format.html { redirect_to pharmaceutical_masters_url, notice: 'Pharmaceutical master was successfully destroyed.' }
+      format.html { redirect_to pharmaceutical_masters_url, notice: DELETE_NOTICE }
       format.json { head :no_content }
     end
   end
