@@ -1,5 +1,5 @@
 class PharmaceuticalMaster < ActiveRecord::Base
-  self.primary_key = "a"
+  # self.primary_key = "a"
 
   def self.integrate
     PharmaceuticalMaster.transaction do
@@ -7,7 +7,7 @@ class PharmaceuticalMaster < ActiveRecord::Base
       imported_num = 0
       pharmaceuticals_list = []
 
-      # LEFT OUTER JOINするため、Hotを軸にeager_loadを使用(本来、priceの右外部か完全結合したい)
+      # LEFT OUTER JOINするため、HOTマスタを軸にeager_loadを使用(本来、PRICEマスタを右外部か完全結合したい)
       pharmaceuticals_masters = HotMaster.eager_load(:price_master, :gs1_master)
       pharmaceuticals_masters.each do |pharmaceutical_master|
         pharmaceutical = new
@@ -23,15 +23,15 @@ class PharmaceuticalMaster < ActiveRecord::Base
         }
 
         if pharmaceutical_master.price_master.present?
-          regulation_id = pharmaceutical_master.price_master.ad
-          efficacy_id = pharmaceutical_master.g[0, 3]
+          regulation_code = pharmaceutical_master.price_master.ad
+          efficacy_code = pharmaceutical_master.g[0, 3]
           pharmaceutical.attributes= {
             g: pharmaceutical_master.price_master.ab,
-            h: regulation_id,
-            i: RegulationMaster.find(regulation_id).name,
+            h: regulation_code,
+            i: RegulationMaster.find_by(code: regulation_code).name,
             j: pharmaceutical_master.price_master.ag,
-            ac: efficacy_id,
-            ad: EfficacyMaster.find(efficacy_id).name
+            ac: efficacy_code,
+            ad: EfficacyMaster.find_by(code: efficacy_code).name
           }
         end
 

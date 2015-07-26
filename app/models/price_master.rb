@@ -1,8 +1,8 @@
 require 'csv'
 class PriceMaster < ActiveRecord::Base
-  self.primary_key = "c"
-  has_many :hot_masters
-  belongs_to :regulation_master, :foreign_key => "ad"
+  # self.primary_key = "c"
+  has_many :hot_masters, :primary_key => "c", :foreign_key => "i"
+  belongs_to :regulation_master, :foreign_key => "ad", :primary_key => "code"
 
   def self.input(file)
     PriceMaster.transaction do

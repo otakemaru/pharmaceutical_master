@@ -1,9 +1,9 @@
 require 'csv'
 class HotMaster < ActiveRecord::Base
   #2015/7現在、HOTマスタを軸としている。JANコードが主流であり、HOTマスタが最も多いから。
-  self.primary_key = "a"
-  belongs_to :price_master, :foreign_key => "i"
-  belongs_to :gs1_master, :foreign_key => "f"
+  # self.primary_key = "a"
+  belongs_to :price_master, :foreign_key => "i", :primary_key => "c"
+  belongs_to :gs1_master, :foreign_key => "f", :primary_key => "ce"
 
   def self.input(file)
     HotMaster.transaction do

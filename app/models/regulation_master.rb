@@ -1,7 +1,7 @@
 require 'csv'
 class RegulationMaster < ActiveRecord::Base
-  self.primary_key = "code"
-  has_one :price_master
+  # self.primary_key = "code"
+  has_one :price_master, :primary_key => "code", :foreign_key => "ad"
 
   def self.input(file)
     RegulationMaster.transaction do

@@ -1,6 +1,6 @@
 require 'csv'
 class EfficacyMaster < ActiveRecord::Base
-  self.primary_key = "code"
+  # self.primary_key = "code"
 
   def self.input(file)
     EfficacyMaster.transaction do

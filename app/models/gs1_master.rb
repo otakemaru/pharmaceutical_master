@@ -1,8 +1,8 @@
 require 'csv'
 class Gs1Master < ActiveRecord::Base
   #本来、販売包装単位コード(cc)がGS1マスタの主キーなので、HOTマスタを右外部結合したい
-  self.primary_key = "ce"
-  has_one :hot_master
+  # self.primary_key = "ce"
+  has_one :hot_master, :primary_key => "ce", :foreign_key => "f"
 
   def self.input(file)
     Gs1Master.transaction do
